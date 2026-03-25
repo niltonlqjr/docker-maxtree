@@ -3,10 +3,10 @@ WORK_DIR="${HOME}"                              # Directory that will be used to
 CONTAINER_CMD="docker"                          # Container application
 BUILD_CMD="build"                               # Container application build command
 CONTEXT_PATH="../"                              # dockerfile context path
-IMAGE_NAME="libvips"                          # name of the container
+IMAGE_NAME="maxtree"                            # name of the container
 IMAGE_VERSION="22.04"                           # version of image
 CONTAINER_IMAGE=${IMAGE_NAME}:${IMAGE_VERSION}  # Name of image to be generated
-CONTAINER_NAME="LIBVIPS"
+CONTAINER_NAME="MAXTREE"
 
 CONTAINER_USER="experiments"			# username in container 
 
