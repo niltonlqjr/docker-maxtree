@@ -25,7 +25,7 @@ if [ -z $RUNNING ]
 then
     RUN_CMD="run"
     CONTAINER_RUN_ARGS="-d -it --name ${CONTAINER_NAME} "
-    VOLUME_ARG="--volume ${HOME}:/home/mpi/host"
+    VOLUME_ARG="--volume ${HOME}:/home/${CONTAINER_USER}/host"
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_IMAGE
     NETWORK_ARG="-p $ports"
@@ -42,14 +42,14 @@ fi
 #run container
 echo "${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
   --env "SHELL=/bin/bash" \
-  --workdir /home/mpi \
+  --workdir /home/${CONTAINER_USER} \
   ${VOLUME_ARG} \
   ${CONTAINER} \
   ${COMMAND_TO_EXEC}
 "
 ${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
   --env "SHELL=/bin/bash" \
-  --workdir /home/mpi \
+  --workdir /home/${CONTAINER_USER} \
   ${VOLUME_ARG} \
   ${CONTAINER} \
   ${COMMAND_TO_EXEC}
