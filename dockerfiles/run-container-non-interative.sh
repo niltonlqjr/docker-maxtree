@@ -21,22 +21,20 @@ fi
 
 RUNNING=`docker ps -a |grep ${CONTAINER_NAME} | awk -F\  '{print $NF}'`
 
-VOLUME_ARG="--volume ${HOME}:/home/mpi/host"
-
 if [ -z $RUNNING ]
 then
     RUN_CMD="run"
     CONTAINER_RUN_ARGS="-d -it --name ${CONTAINER_NAME} "
+    VOLUME_ARG="--volume ${HOME}:/home/mpi/host"
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_IMAGE
-
     NETWORK_ARG="-p $ports"
 else
     RUN_CMD="exec"
     CONTAINER_RUN_ARGS="-d"
+    VOLUME_ARG=""
     COMMAND_TO_EXEC="/bin/bash"
     CONTAINER=$CONTAINER_NAME
-
     NETWORK_ARG=""
 fi
 
