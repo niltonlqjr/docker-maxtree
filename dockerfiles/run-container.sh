@@ -17,12 +17,15 @@ fi
 
 RUNNING=`docker ps -a |grep ${CONTAINER_NAME} | awk -F\  '{print $NF}'`
 
+
+VOLUME_ARG="--volume ${HOME}:/home/mpi/host"
+
 if [ -z $RUNNING ]
 then
     RUN_CMD="run"
     CONTAINER_RUN_ARGS="-it --rm --name ${CONTAINER_NAME} "
-    VOLUME_ARG="--volume ${HOME}:/home/${CONTAINER_USER}/host"
-    VOLUME_ARG=${VOLUME_ARG}" --volume /mnt:/mnt"
+    
+    
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_IMAGE
 
@@ -30,7 +33,6 @@ then
 else
     RUN_CMD="exec"
     CONTAINER_RUN_ARGS="-it"
-    VOLUME_ARG=""
     COMMAND_TO_EXEC="/bin/bash"
     CONTAINER=$CONTAINER_NAME
 
