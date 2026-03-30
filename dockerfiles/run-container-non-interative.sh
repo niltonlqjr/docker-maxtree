@@ -8,7 +8,6 @@
 #import some common variables to build container
 source ./vars.sh
 
-ip=$1
 
 # args used to run container
 
@@ -18,9 +17,8 @@ RUNNING=`docker ps -a |grep ${CONTAINER_NAME} | awk -F\  '{print $NF}'`
 if [ -z $RUNNING ]
 then
     RUN_CMD="run"
-    CONTAINER_RUN_ARGS="-it --rm --name ${CONTAINER_NAME} "
-    VOLUME_ARG="--volume ${HOME}:/home/${CONTAINER_USER}/host"
-    VOLUME_ARG=${VOLUME_ARG}" --volume /mnt:/mnt"
+    CONTAINER_RUN_ARGS="-d -it --name ${CONTAINER_NAME} "
+    VOLUME_ARG="--volume ${HOME}:/home/mpi/host"
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_IMAGE
 
@@ -30,7 +28,7 @@ then
     NETWORK_ARG="--network host"
 else
     RUN_CMD="exec"
-    CONTAINER_RUN_ARGS="-it"
+    CONTAINER_RUN_ARGS="-d"
     VOLUME_ARG=""
     COMMAND_TO_EXEC="/bin/bash"
     CONTAINER=$CONTAINER_NAME
@@ -38,23 +36,23 @@ else
     NETWORK_ARG=""
 fi
 
-
 if [ ! -z $1 ]
 then
     NETWORK_ARG=$1
 fi
 
+
 #run container
 echo "${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
   --env "SHELL=/bin/bash" \
-  --workdir /home/${CONTAINER_USER} \
+  --workdir /home/mpi \
   ${VOLUME_ARG} \
   ${CONTAINER} \
   ${COMMAND_TO_EXEC}
 "
 ${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
   --env "SHELL=/bin/bash" \
-  --workdir /home/${CONTAINER_USER} \
+  --workdir /home/mpi \
   ${VOLUME_ARG} \
   ${CONTAINER} \
   ${COMMAND_TO_EXEC}
