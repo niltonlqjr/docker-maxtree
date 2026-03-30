@@ -8,10 +8,12 @@
 #import some common variables to build container
 source ./vars.sh
 
-ip=$1
-
-# args used to run container
-
+if [ -z $1 ]
+then
+    ports=7233
+else
+    ports=$1
+fi
 
 RUNNING=`docker ps -a |grep ${CONTAINER_NAME} | awk -F\  '{print $NF}'`
 
@@ -24,10 +26,7 @@ then
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_IMAGE
 
-    # arg to use network of host machine
-    # to use this configuration, the machine must have a mpi user that is can
-    # connect to other cluster machines through ssh with public private key.
-    NETWORK_ARG="--network host"
+    NETWORK_ARG="-p $ports"
 else
     RUN_CMD="exec"
     CONTAINER_RUN_ARGS="-it"
@@ -36,12 +35,6 @@ else
     CONTAINER=$CONTAINER_NAME
 
     NETWORK_ARG=""
-fi
-
-
-if [ ! -z $1 ]
-then
-    NETWORK_ARG=$1
 fi
 
 #run container
