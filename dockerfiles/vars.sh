@@ -8,6 +8,8 @@ IMAGE_VERSION="22.04"                           # version of image
 CONTAINER_IMAGE=${IMAGE_NAME}:${IMAGE_VERSION}  # Name of image to be generated
 CONTAINER_NAME="MAXTREE"
 
+CONTAINER_ENV_VARS="SHELL=/bin/bash"
+
 CONTAINER_USER="experiments"			# username in container 
 
 HOST_UID=$(id -u) # get user ID from system to use in docker 

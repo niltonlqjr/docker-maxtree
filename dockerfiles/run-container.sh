@@ -38,14 +38,14 @@ fi
 
 #run container
 echo "${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
-  --env "SHELL=/bin/bash" \
+  --env "${CONTAINER_ENV_VARS}" \
   --workdir /home/${CONTAINER_USER} \
   ${VOLUME_ARG} \
   ${CONTAINER} \
   ${COMMAND_TO_EXEC}
 "
 ${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
-  --env "SHELL=/bin/bash" \
+  --env "${CONTAINER_ENV_VARS}" \
   --workdir /home/${CONTAINER_USER} \
   ${VOLUME_ARG} \
   ${CONTAINER} \

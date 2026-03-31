@@ -26,9 +26,6 @@ RUN addgroup --gid $GID experiments
 RUN adduser --uid $UID --gid $GID --disabled-password --gecos "" experiments 
 RUN echo 'experiments ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN echo 'LD_LIBRARY_PATH="/usr/local/hdf5/lib"' >> /etc/environment
-
-
 RUN mkdir -p /dependencies
 
 #install mozjpeg and openjpeg
@@ -97,14 +94,19 @@ RUN git clone https://github.com/niltonlqjr/rapidyaml-fork.git --recursive && \
     make install
 
 #change user
-
+RUN echo 'LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/hdf5/lib:/usr/local/lib"' >> /etc/environment
+ENV LD_LIBRARY_PATH=/usr/local/lib
 USER experiments
 
 WORKDIR /home/experiments
 
+ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/hdf5/lib
+
 RUN git clone https://github.com/niltonlqjr/maxtree.git
+RUN mkdir -p /home/experiments/maxtree/output/parallel/example
 
 RUN mkdir /home/experiments/host
+
 
 RUN pip3 install psutil
 RUN sudo pip3 install psutil
