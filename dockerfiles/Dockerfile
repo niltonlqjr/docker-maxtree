@@ -104,8 +104,5 @@ RUN mkdir -p /home/experiments/maxtree/output/parallel/example
 
 RUN mkdir /home/experiments/host
 
-
 RUN pip3 install psutil
 RUN sudo pip3 install psutil
-
-CMD sudo service ssh start; bash
