@@ -94,13 +94,10 @@ RUN git clone https://github.com/niltonlqjr/rapidyaml-fork.git --recursive && \
     make install
 
 #change user
-RUN echo 'LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/hdf5/lib:/usr/local/lib"' >> /etc/environment
-ENV LD_LIBRARY_PATH=/usr/local/lib
+
 USER experiments
 
 WORKDIR /home/experiments
-
-ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/hdf5/lib
 
 RUN git clone https://github.com/niltonlqjr/maxtree.git
 RUN mkdir -p /home/experiments/maxtree/output/parallel/example
