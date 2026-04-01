@@ -94,6 +94,7 @@ RUN git clone https://github.com/niltonlqjr/rapidyaml-fork.git --recursive && \
     make install
 
 #change user
+ENV LD_LIBRARY_PATH=/usr/local/lib
 
 USER experiments
 

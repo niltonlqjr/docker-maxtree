@@ -8,7 +8,7 @@ IMAGE_VERSION="22.04"                           # version of image
 CONTAINER_IMAGE=${IMAGE_NAME}:${IMAGE_VERSION}  # Name of image to be generated
 CONTAINER_NAME="MAXTREE"
 
-CONTAINER_ENV_VARS="SHELL=/bin/bash; LD_LIBRARY_PATH=/usr/local/lib"
+CONTAINER_ENV_VARS="'SHELL=/bin/bash"
 
 CONTAINER_USER="experiments"			# username in container 
 
