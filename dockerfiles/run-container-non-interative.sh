@@ -13,9 +13,9 @@ source ./vars.sh
 
 if [ -z $1 ]
 then
-    ports=7233
+    ports=7233:7233
 else
-    ports=$1
+    ports=$1:$1
 fi
 
 
