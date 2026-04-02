@@ -107,3 +107,5 @@ RUN mkdir /home/experiments/host
 
 RUN pip3 install psutil
 RUN sudo pip3 install psutil
+
+RUN pip3 install pyyaml
