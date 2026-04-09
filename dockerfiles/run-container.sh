@@ -15,7 +15,7 @@ else
     ports=$1:$1
 fi
 
-RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" |grep MAXTREE | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
+RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" | grep ${CONTAINER_NAME} | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
 
 if [ -z $RUNNING ]
 then
