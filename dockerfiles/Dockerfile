@@ -109,3 +109,6 @@ RUN pip3 install psutil
 RUN sudo pip3 install psutil
 
 RUN pip3 install pyyaml
+RUN sudo pip3 install pyyaml
+
+RUN cd maxtree && git pull
