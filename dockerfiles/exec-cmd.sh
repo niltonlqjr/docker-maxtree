@@ -8,7 +8,7 @@ fi
 
 RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" | grep ${CONTAINER_NAME} | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
 
-if [ -z ${RUNNING} ] || [ "${RUNNING}" == "EXITED"]; then
+if [ -z ${RUNNING} ] || [ "${RUNNING}" == "EXITED" ]; then
     echo "Container ${CONTAINER_NAME} is not running"
     exit
 else
