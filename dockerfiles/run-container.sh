@@ -10,12 +10,14 @@ source ./vars.sh
 
 if [ -z $1 ]
 then
-    ports_lists=("7233" "7234")
+    ports_list=("7233" "7234")
 else
-    ports_lists="$@"
+    ports_list="$@"
 fi
 
 RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" | grep ${CONTAINER_NAME} | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
+echo "RUNNING:${RUNNING}"
+echo "PROTS:${ports_list[@]}"
 
 if [ -z $RUNNING ]
 then
@@ -27,9 +29,9 @@ then
     CONTAINER=$CONTAINER_IMAGE
     NETWORK_ARG=""
     
-    for port in ${ports_list}
+    for port in ${ports_list[@]}
     do
-        NETWORK_ARG=${NETWORK_ARG}" -p ${port}:${port}"
+        NETWORK_ARG="${NETWORK_ARG} -p ${port}:${port}"
     done
 
     ENV_VAR="--env ${CONTAINER_ENV_VARS}"
