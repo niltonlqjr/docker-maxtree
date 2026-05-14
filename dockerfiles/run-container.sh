@@ -10,9 +10,9 @@ source ./vars.sh
 
 if [ -z $1 ]
 then
-    ports=7233:7233
+    ports_lists=("7233" "7234")
 else
-    ports=$1:$1
+    ports_lists="$@"
 fi
 
 RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" | grep ${CONTAINER_NAME} | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
@@ -25,7 +25,13 @@ then
     VOLUME_ARG=${VOLUME_ARG}" --volume /mnt:/mnt"
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_IMAGE
-    NETWORK_ARG="-p $ports"
+    NETWORK_ARG=""
+    
+    for port in ${ports_list}
+    do
+        NETWORK_ARG=${NETWORK_ARG}" -p ${port}:${port}"
+    done
+
     ENV_VAR="--env ${CONTAINER_ENV_VARS}"
     WORKDIR_VAR="--workdir /home/${CONTAINER_USER}"
 elif [ "$RUNNING" == "EXITED" ]; then
