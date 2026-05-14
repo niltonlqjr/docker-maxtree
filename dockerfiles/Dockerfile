@@ -111,4 +111,6 @@ RUN sudo pip3 install psutil
 RUN pip3 install pyyaml
 RUN sudo pip3 install pyyaml
 
-RUN cd maxtree && git pull
+WORKDIR /home/experiments/maxtree
+RUN git pull
+RUN make TYPE=R OPT=-O3
