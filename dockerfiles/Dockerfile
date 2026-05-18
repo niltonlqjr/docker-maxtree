@@ -14,7 +14,7 @@ RUN apt-get update && \
     apt-get install -y \
     vim git wget iputils-ping sudo htop net-tools locales \
     unzip sudo build-essential openssh-client openssh-server \
-    libncurses5-dev libpcap-dev python3-pip pssh cmake meson\
+    libncurses5-dev libpcap-dev python3-pip pssh cmake meson dmidecode \
     #mozjpeg
     nasm libpng-dev \
     #libvips
@@ -100,9 +100,6 @@ USER experiments
 
 WORKDIR /home/experiments
 
-RUN git clone https://github.com/niltonlqjr/maxtree.git
-RUN mkdir -p /home/experiments/maxtree/output/parallel/example
-
 RUN mkdir /home/experiments/host
 
 RUN pip3 install psutil
@@ -111,6 +108,3 @@ RUN sudo pip3 install psutil
 RUN pip3 install pyyaml
 RUN sudo pip3 install pyyaml
 
-WORKDIR /home/experiments/maxtree
-RUN git pull
-RUN make TYPE=R OPT=-O3
