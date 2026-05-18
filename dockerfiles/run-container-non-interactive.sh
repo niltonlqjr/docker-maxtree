@@ -20,7 +20,7 @@ fi
 
 RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" | grep ${CONTAINER_NAME} | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
 echo "RUNNING:${RUNNING}"
-echo "PROTS:${ports_list[@]}"
+echo "PORTS:${ports_list[@]}"
 
 if [ -z $RUNNING ]
 then
