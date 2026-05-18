@@ -36,7 +36,6 @@ then
 
     ENV_VAR="--env ${CONTAINER_ENV_VARS}"
     WORKDIR_VAR="--workdir /home/${CONTAINER_USER}"
-    DEVICE_ARG="--device /dev/mem:/dev/mem"
 elif [ "$RUNNING" == "EXITED" ]; then
     RUN_CMD="start"
     CONTAINER_RUN_ARGS="-i "
@@ -44,7 +43,6 @@ elif [ "$RUNNING" == "EXITED" ]; then
     COMMAND_TO_EXEC=""
     CONTAINER=$CONTAINER_NAME
     NETWORK_ARG=""
-    DEVICE_ARG=""
 else
     RUN_CMD="exec"
     CONTAINER_RUN_ARGS="-it"
@@ -54,13 +52,11 @@ else
     NETWORK_ARG=""
     ENV_VAR="--env ${CONTAINER_ENV_VARS}"
     WORKDIR_VAR="--workdir /home/${CONTAINER_USER}"
-    DEVICE_ARG=""
 fi
 
 #run container
 echo "${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
   ${ENV_VAR} \
-  ${DEVICE_ARG} \
   ${WORKDIR_VAR} \
   ${VOLUME_ARG} \
   ${CONTAINER} \
@@ -68,7 +64,6 @@ echo "${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
 "
 ${CONTAINER_CMD} ${RUN_CMD} ${CONTAINER_RUN_ARGS} ${NETWORK_ARG}\
   ${ENV_VAR} \
-  ${DEVICE_ARG} \
   ${WORKDIR_VAR} \
   ${VOLUME_ARG} \
   ${CONTAINER} \
