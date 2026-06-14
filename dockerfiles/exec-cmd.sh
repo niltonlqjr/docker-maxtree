@@ -1,5 +1,7 @@
 #import some common variables to build container
-source ./vars.sh
+script=`realpath $0 `
+script_dir=`dirname $script`
+source ${script_dir}/vars.sh
 
 if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ -z $1 ] || [ -z $2 ]; then
     echo "usage $0 <work directory> <command>"

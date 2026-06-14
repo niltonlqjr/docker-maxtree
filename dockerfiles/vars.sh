@@ -16,4 +16,3 @@ HOST_UID=$(id -u) # get user ID from system to use in docker
 HOST_GID=$(id -g) # get user ID from system to use in docker
 
 
-

@@ -1,5 +1,7 @@
 #import some common variables to build container
-source ./vars.sh
+script=`realpath $0 `
+script_dir=`dirname $script`
+source ${script_dir}/vars.sh
 
 RUNNING=`docker ps -a --format "{{.Names}}:{{.Status}}" |grep ${CONTAINER_NAME} | awk -F: '{print $2}' | awk -F' ' '{print toupper($1)}'`
 
