@@ -12,13 +12,13 @@ ENV LANG=en_US.utf8
 
 RUN apt-get update && \
     apt-get install -y \
-    vim git wget iputils-ping sudo htop net-tools locales \
+    vim git wget iputils-ping sudo htop net-tools locales time \
     unzip sudo build-essential openssh-client openssh-server \
     libncurses5-dev libpcap-dev python3-pip pssh cmake meson dmidecode \
     #mozjpeg
     nasm libpng-dev \
     #libvips
-    libglib2.0-dev libjpeg-dev
+    libglib2.0-dev libjpeg-dev 
 
 RUN echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
 
